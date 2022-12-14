@@ -8,7 +8,7 @@
 ____
 
 ## 编辑规范
-1. ### 每个模块源代码都会 **export** `enum` `class` `interface` `function` `const` 5种方法
+### 1. 每个模块源代码都会 **export** `enum` `class` `interface` `function` `const` 5种方法
     - 因此你应该在 `.js` 中添加最多5个箭头函数，例如：
         ```javascript
         Enum => {
@@ -20,7 +20,7 @@ ____
         > **`enum`** -- *wrong* ***(X)***<br>
         > **`Enum`** -- *right* ***(O)***
 
-2. ### 箭头函数中必须填入原版模块中定义的东西
+### 2. 箭头函数中必须填入原版模块中定义的东西
     - 但为了方便阅读，一切定义的东西都应当转换为 `Object {}`，例如：
         ```typescript
         export enum ObjectiveSortOrder {
@@ -60,7 +60,7 @@ ____
     > 转换成 `Object {}` 的方式能够让没学过 **ts** 和 **class类别** 的人明确地知道<br>
     > `BeforeItemUseEvent.source` 将返回一个 `Entity`
 
-3. ### 几乎所有物件都必须标注中文解释
+### 3. 几乎所有物件都必须标注中文解释
     - 基本上就是一行注释一行代码，一行注释一行代码。注释在上方，代码在下方
     - 仅读 `readonly` 的参数必须在注释后方写上 `-readonly`
     - 性质相同的参数可以将注释标在各参数的后方,而非上方，例如：
