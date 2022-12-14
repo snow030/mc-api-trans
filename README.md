@@ -2,7 +2,7 @@
 尝试把mc的api模块翻译成容易看懂的js写法，并标注上合理的中文注释
 
 > ## 请注意
-> - [`server.ts`](https://github.com/snow030/mc-api-trans/blob/main/server/server.ts) [`gametest.ts`](https://github.com/snow030/mc-api-trans/blob/main/gametest/gametest.ts) 是原版的Minecraft api模块，请不要对它进行改动
+> - [`server.ts`](./server/server.ts) [`gametest.ts`](./gametest/gametest.ts) 是原版的Minecraft api模块，请不要对它进行改动
 > - 你可以对所有 `.js(javascript)` 文档进行改动，但请根据下方给予的规范做编辑
 
 ____
@@ -74,3 +74,10 @@ ____
         ```
     > **注意**，注释的用意是为了让玩家快速了解该物件的大致用途，而非它的所有特性。过多的注释反而会造成混乱<br>
     > **如：**【*输入消息时触发的事件，这事件会在消息发出前触发*】应当缩写成 【*输入消息事件*】即可
+
+____
+
+## 模块链接
+- [`@minecraft/server`](https://www.npmjs.com/package/@minecraft/server/v/1.1.0-beta.1.19.60-preview.23 "原版api模块(beta)")
+- [`@minecraft/server-gametest`](https://www.npmjs.com/package/@minecraft/server-gametest/v/1.0.0-beta.1.19.60-preview.23 "原版gametest模块(beta)")
+- [`@minecraft/server-ui`](https://www.npmjs.com/package/@minecraft/server-ui/v/1.0.0-beta.1.19.60-preview.23 "原版ui模块(beta)")
