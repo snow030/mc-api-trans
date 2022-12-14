@@ -1,3 +1,4 @@
+//hahahaha-yyl
 ArgId=>{
     //六个朝向
     Direction = {
