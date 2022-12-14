@@ -1,4 +1,4 @@
-ArgId=>{
+Enum => {
     //六个朝向
     Direction = {
         down: 'down',
@@ -98,7 +98,7 @@ ArgId=>{
     };
 };
 
-Class=>{
+Class => {
     //一个事件，玩家输入消息时触发
     BeforeChatEvent = {
         //是否拦截消息
