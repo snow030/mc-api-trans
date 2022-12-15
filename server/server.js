@@ -117,11 +117,10 @@ Class => {
         //添加一个输入消息时要触发的回调函数
         subscribe: function( callback = ()=>{} ){
             callback(BeforeChatEvent);
+            return callback;
         },
         //删除回调函数
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforeChatEvent);
-        }
+        unsubscribe: function( callback = ()=>{} ){}
     };
     //导致数据驱动的实体事件
     BeforeDataDrivenEntityTriggerEvent = {
@@ -136,14 +135,15 @@ Class => {
     };
     //实体事件监听器
     BeforeDataDrivenEntityTriggerEventSignal = {
-        //监听实体事件-option可选
+        /*监听实体事件-option可选
+        *     option - 监听哪些实体/哪些事件（event），不写表示全部监听
+        */
         subscribe: function( callback = ()=>{}, option = {EntityDataDrivenTriggerEventOptions} ){
             callback(BeforeDataDrivenEntityTriggerEvent);
+            return callback;
         },
         //取消监听实体事件
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforeDataDrivenEntityTriggerEvent);
-        }
+        unsubscribe: function( callback = ()=>{} ){}
     };
     //爆炸事件
     BeforeExplosionEvent = {
@@ -161,11 +161,10 @@ Class => {
         //监听爆炸事件
         subscribe: function( callback = ()=>{} ){
             callback(BeforeExplosionEvent);
+            return callback;
         },
         //取消监听爆炸事件
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforeExplosionEvent);
-        }
+        unsubscribe: function( callback = ()=>{} ){}
     };
     //导致组件修改的物品事件
     BeforeItemDefinitionTriggeredEvent = {
@@ -183,11 +182,10 @@ Class => {
         //监听物品事件
         subscribe: function( callback = ()=>{} ){
             callback(BeforeItemDefinitionTriggeredEvent);
+            return callback;
         },
         //取消监听物品事件
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforeItemDefinitionTriggeredEvent);
-        }
+        unsubscribe: function( callback = ()=>{} ){}
     };
     //使用物品事件
     BeforeItemUseEvent = {
@@ -203,11 +201,10 @@ Class => {
         //监听使用物品事件
         subscribe: function( callback = ()=>{} ){
             callback(BeforeItemUseEvent);
+            return callback;
         },
         //取消监听使用物品事件
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforeItemUseEvent);
-        }
+        unsubscribe: function( callback = ()=>{} ){}
     };
     //对方块使用物品事件
     BeforeItemUseOnEvent = {
@@ -231,11 +228,10 @@ Class => {
         //监听对方块使用物品事件
         subscribe: function( callback = ()=>{} ){
             callback(BeforeItemUseOnEvent);
+            return callback;
         },
         //取消监听对方块使用物品事件
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforeItemUseOnEvent);
-        }
+        unsubscribe: function( callback = ()=>{} ){}
     };
     //活塞推动/拉回事件
     BeforePistonActivateEvent = {
@@ -255,11 +251,10 @@ Class => {
         //监听活塞移动事件
         subscribe: function( callback = ()=>{} ){
             callback(BeforePistonActivateEvent);
+            return callback;
         },
         //取消监听活塞移动事件
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforePistonActivateEvent);
-        }
+        unsubscribe: function( callback = ()=>{} ){}
     };
     //脚本终止事件
     BeforeWatchdogTerminateEvent = {
@@ -273,13 +268,124 @@ Class => {
         //监听脚本终止事件
         subscribe: function( callback = ()=>{} ){
             callback(BeforeWatchdogTerminateEvent);
+            return callback;
         },
-        //取消监脚本终止事件
-        unsubscribe: function( callback = ()=>{} ){
-            callback(BeforeWatchdogTerminateEvent);
-        }
+        //取消监听脚本终止事件
+        unsubscribe: function( callback = ()=>{} ){}
     };
-    //来源于方块的事件
+    //一格实际存在的方块
+    Block = {
+        //方块所在的维度-readonly
+        demension: Demension,
+        //方块是否含水
+        isWaterlogged: boolean,
+        //方块所在位置（坐标）-readonly
+        location: BlockLocation,
+        //方块属性集（虚构的方块）-readonly
+        permutation: BlockPermutation,
+        //方块类型（类似setblock命令需要的“方块”）-readonly
+        type: BlockType,
+        //方块坐标-readonly
+        x: number,
+        y: number,
+        z: number,
+        /*查看某虚构方块能不能放在这格方块旁-faceToPlaceOn可选
+        *     blockToPlace - 要放置的虚构方块
+        *     faceToPlaceOn - 放在哪个方向，不写表示任意方向
+        */
+        canPlace: function( blockToPlace = BlockPermutation || BlockType , faceToPlaceOn = Direction ){
+            return boolean;
+        },
+        //返回该方块的某个成分（component）
+        getComponent: function( componentName = string){},
+        //返回红石充能值
+        getRedstonePower: function(){},
+        //获取方块标签列表
+        getTags: function(){ return [string] },
+        //查找方块标签
+        hasTags: function( tag = string ){ return boolean },
+        //设置这格是什么方块（虚构方块）
+        setPermutation: function( permutation = BlockPermutation ){},
+        //设置这格的方块类型（类似setblock）
+        setType: function( type = BlockType ){},
+        //查看这里能不能放置某个虚构方块
+        trySetPermutation: function( permutation = BlockPermutation ){ return boolean }
+    };
+    //定义矩形区域
+    BlockAreaSize( x = number, y = number, z = number );
+    //矩形的方块区域（类似clone的前两段坐标）
+    BlockAreaSize = {
+        //边长
+        x: number,//宽
+        y: number,//高
+        z: number,//长
+        //和其他矩形区域大小相同吗
+        equals: function( other = BlockAreaSize ){ return boolean }
+    };
+    //玩家破坏方块事件
+    BlockBreakEvent = {
+        //发生事件的那格方块（实际存在的方块），可能是空气可能是方块-readonly
+        block: Block,
+        //破坏前的方块（虚构方块）-readonly
+        brokenBlockPermutation: BlockPermutation,
+        //所在维度-readonly
+        demension: Demension,
+        //破坏方块的玩家-readonly
+        player: Player
+    };
+    //方块破坏监听器
+    BlockBreakEventSignal = {
+        //监听方块破坏事件
+        subscribe: function( callback = ()=>{} ){
+            callback(BlockBreakEvent);
+            return callback;
+        },
+        //取消监听方块破坏事件
+        unsubscribe: function( callback = ()=>{} ){}
+    };
+    //？？？
+    BlockComponent
+    //方块事件
     BlockEvent = {
+        //发生事件的方块（实际存在的方块）-readonly
+        block: Block,
+        //所在维度-readonly
+        demension: Demension
+    };
+    //方块爆炸事件
+    BlockExplodeEvent = {
+        //爆炸的那格方块（实际存在的方块）-readonly
+        block: Block,
+        //所在维度-readonly
+        demension: Demension,
+        //导致爆炸的实体-readonly
+        source: Entity
+    };
+    BlockExplodeEventSignal = {
+        //监听方块爆炸事件
+        subscribe: function( callback = ()=>{} ){
+            callback(BlockExplodeEvent);
+            return callback;
+        },
+        //取消监听方块爆炸事件
+        unsubscribe: function( callback = ()=>{} ){}
+    };
+    //方块被打击的信息
+    BlockHitInformation = {
+        //被打击的那格方块（实际存在的方块）-readonly
+        block: Block,
+        //被打击的方向-readonly
+        face: Direction,
+        //被打击的面的什么位置(x轴)-readonly
+        faceLocationX: number,
+        //被打击的面的什么位置(y轴)-readonly
+        faceLocationY: number,
+    };
+    //方块物品栏成分（箱子）
+    BlockInventoryComponent = {
+        //-readonly
+        container: BlockInventoryComponentContainer,
+        //方块坐标-readonly
+        location: BlockLocation
     };
 };
