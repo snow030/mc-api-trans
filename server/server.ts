@@ -4,8 +4,8 @@
 //                 Mike Ammerlaan <https://github.com/mammerla>
 
 /* *****************************************************************************
-Copyright (c) Microsoft Corporation.
-***************************************************************************** */
+   Copyright (c) Microsoft Corporation.
+   ***************************************************************************** */
 /**
  * @packageDocumentation
  * Contains many types related to manipulating a Minecraft
@@ -15,7 +15,7 @@ Copyright (c) Microsoft Corporation.
  * ```json
  * {
  *   "module_name": "@minecraft/server",
- *   "version": "1.1.0-internal.1.19.60-preview.23"
+ *   "version": "1.1.0-internal.1.19.60-preview.24"
  * }
  * ```
  *
@@ -3226,6 +3226,7 @@ export class Entity {
      * @throws This function can throw errors.
      */
     getEffect(effectType: EffectType): Effect;
+    getEffects(): Effect[];
     /**
      * @remarks
      * Returns a potential set of entities from the direction that
@@ -13282,6 +13283,7 @@ export class Player extends Entity {
      * @throws This function can throw errors.
      */
     getEffect(effectType: EffectType): Effect;
+    getEffects(): Effect[];
     /**
      * @remarks
      * Returns a potential set of entities from the direction that
